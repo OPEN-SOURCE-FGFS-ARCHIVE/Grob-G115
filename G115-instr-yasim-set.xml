@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<!--
+  MD500 multiplayer passenger view.
+
+  Copyright (C) 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+  This file is licensed under the GPL license version 2 or later.
+-->
+<!--
+  Usage: fgfs - -prop:/sim/remote/pilot-callsign="remote pilot callsign" - -aircraft=Fi-156-passenger
+-->
+<PropertyList>
+
+ <sim>
+
+  <description>Grob 115 Instructor/CoPilot</description>
+  <author>Mathias Froehlich, Algernon</author>
+  <status>vAlpha 0.9</status>
+  <aircraft-version>$Id$</aircraft-version>
+  <variant-of>g115</variant-of>
+  
+  <flight-model>null</flight-model>
+
+	<previews>
+	  <preview>
+		<type>interior</type>
+		<splash type="bool">true</splash>
+		<path>Splash/splash.png</path>
+	  </preview>
+	  <preview>
+		<type>exterior</type>
+		<splash type="bool">true</splash>
+		<path>Splash/splash1.png</path>
+	  </preview>
+	  <preview>
+		<type>exterior</type>
+		<splash type="bool">true</splash>
+		<path>Splash/splash2.png</path>
+	  </preview>
+	  <preview>
+		<type>exterior</type>
+		<splash type="bool">true</splash>
+		<path>Splash/splash3.png</path>
+	  </preview>
+	  <preview>
+		<type>exterior</type>
+		<splash type="bool">true</splash>
+		<path>Splash/splash4.png</path>
+	  </preview>
+	  <preview>
+		<type>exterior</type>
+		<splash type="bool">true</splash>
+		<path>Splash/splash5.png</path>
+	  </preview>
+	</previews>
+
+  <presets>
+   <onground type="bool">false</onground>
+   <altitude-agl-ft type="double">30.0</altitude-agl-ft>
+  </presets>
+
+  <!-- 3d model -->
+  <model>
+   <path>Aircraft/Grob-G115/Models/Tutor_CoPilot.xml</path>
+  </model>
+
+  <!-- Views -->
+  <view n="0">
+   <!-- Passenger's position. -->
+   <name>Copilot View</name>
+   <type>lookfrom</type>
+   <internal type="bool">true</internal>
+   <config>
+    <internal type="bool">true</internal>
+    <from-model type="bool">false</from-model>
+    <from-model-idx type="int">0</from-model-idx>
+    <eye-lat-deg-path>/position/latitude-deg</eye-lat-deg-path>
+    <eye-lon-deg-path>/position/longitude-deg</eye-lon-deg-path>
+    <eye-alt-ft-path>/position/altitude-ft</eye-alt-ft-path>
+    <eye-heading-deg-path>/orientation/heading-deg</eye-heading-deg-path>
+    <eye-pitch-deg-path>/orientation/pitch-deg</eye-pitch-deg-path>
+    <eye-roll-deg-path>/orientation/roll-deg</eye-roll-deg-path>
+
+    <!-- x/y/z == right/up/back -->
+   	 <x-offset-m archive="y">  0.280 </x-offset-m> <!-- Right -->
+      <y-offset-m archive="y">  -0.250 </y-offset-m> <!-- Up    -->
+      <z-offset-m archive="y"> -1.172 </z-offset-m> <!-- Back  -->
+      <pitch-offset-deg> -14 </pitch-offset-deg>
+      <default-field-of-view-deg> 65 </default-field-of-view-deg>
+   </config>
+  </view>
+
+ 
+  <chase-distance-m type="double">-18.0</chase-distance-m>
+
+ 
+    <sound>
+      <path archive="y">Aircraft/Grob-G115/Sounds/g115-sound.xml</path>
+    </sound>
+
+		
+
+	  <multiplay>
+      <chat_display>1</chat_display>
+      <generic> 
+	  <!-- Nav lights on -->
+      <int n="0" alias="/controls/switches/nav-lights-switch" />
+      <!-- Beacon on -->
+      <int n="1" alias="/controls/switches/beacon-switch" />
+      <!-- Landing lights on -->
+      <int n="2" alias="/controls/switches/landing-lights-switch" />
+	    <!-- Taxi light on -->
+      <int n="3" alias="/controls/switches/strobe-switch" />
+        
+        <int type="int" n="4">  0 </int>                                      <!-- 4 immat -->
+        <int type="int" n="5">  0 </int>                                      <!-- 5 immat -->
+        <int type="bool" n="6"> 1 </int>                                      <!-- 6 smoke/bomb/torpedo -->
+        <!-- Crashed -->
+      <int n="7" alias="/sim/crashed" />
+        <int n="8" alias="/systems/electrical/outputs/nav-lights">  0 </int>  <!-- 8 nav-lights -->
+        <int n="9" alias="/sim/model/lights/beacon/state">  false </int>      <!-- 9 strobe-lights -->
+        <int n="10" alias="/controls/electric/key-pos">  0 </int>             <!-- 10 key position -->
+        <float n="0" alias="/sim/model/door-positions/crew/position-norm"/>
+        <float n="1" alias="/sim/model/door-positions/passenger/position-norm"/>
+        <float n="2" alias="/position/gear-agl-m"> 0 </float>                         <!-- altitude for MP shadow -->
+        <float n="3" alias="/position/altitude-ft"> 0 </float>                        <!-- altitude for Smoke/Trail -->
+        <float n="4" alias="/engines/engine[0]/rpm"/>
+        <float n="5" alias="/engines/engine[0]/cranking"/>
+        <float n="6" alias="/gear/gear[0]/wow/"/>
+        <float n="7" alias="/gear/gear[1]/wow/"/>
+        <float n="8" alias="/gear/gear[2]/wow/"/>
+        <float n="9" alias="/gear/gear[0]/rollspeed-ms"/>
+        <float n="10" alias="/gear/gear[1]/rollspeed-ms"/>
+        <float n="11" alias="/gear/gear[2]/rollspeed-ms"/>
+        <!-- For Bombable -->
+        <int type="int" n="10" alias="controls/armament/trigger">0</int>
+        <string n="9" type="string" />
+      </generic>
+    </multiplay>	
+
+  <!-- Aircraft specific help. -->
+  <!-- help include="help.xml"/ -->
+
+  <!-- systems>
+   <electrical>
+    <path/>
+   </electrical>
+  </systems>
+  <instrumentation>
+   <path/>
+  </instrumentation -->
+
+  <menubar>
+   <default>
+    <menu n="100">
+     <label>Grob Tutor</label>
+     <item>
+      <label>Select Pilot</label>
+      <binding>
+       <command>nasal</command>
+       <script>
+        dual_control_tools.
+          copilot_dialog.show(aircraft_dual_control.pilot_type);
+       </script>
+      </binding>
+     </item>
+    </menu>
+   </default>
+  </menubar>
+
+ </sim>
+ 
+ <instrumentation>
+
+  <kcs55 include="Models/Interior/Panel/Instruments/kcs55/kcs55.xml"/>
+    <kcs55 n="0">
+      <ka51>
+        <slaved>true</slaved>
+      </ka51>
+    </kcs55>
+  </instrumentation>
+
+ <nasal>
+ <doors>
+      <file>Aircraft/Grob-G115/Nasal/doors.nas</file>
+    </doors>
+    <zkv500>
+      <file>Aircraft/Instruments-3d/zkv500/ZKV500.nas</file>
+    </zkv500>
+	<lights>
+      <file>Aircraft/Grob-G115/Nasal/Lights.nas</file>
+    </lights>
+    <g115>
+      <file>Aircraft/Generic/limits.nas</file>
+      <file>Aircraft/Grob-G115/Nasal/g115.nas</file>
+      <file>Aircraft/Grob-G115/Nasal/liveries.nas</file>
+      <file>Aircraft/Grob-G115/Nasal/immat.nas</file>
+    <file>Aircraft/Grob-G115/Nasal/light.nas</file>
+      <file>Aircraft/Grob-G115/Nasal/g115-electrical.nas</file>
+      <file>Aircraft/Grob-G115/Nasal/instruments.nas</file>
+      <file>Aircraft/Grob-G115/Models/Interior/Panel/Instruments/WarningPanel/WarningPanel.nas</file>
+      <file>Aircraft/Grob-G115/Models/Interior/Panel/Instruments/KMA26/KMA26.nas</file>
+      <file>Aircraft/Grob-G115/Models/Interior/Panel/Instruments/kcs55/kcs55.nas</file>
+        <script><![CDATA[
+          KCS55.new();
+          ]]>
+        </script>
+    </g115>
+
+  <dual_control_tools>
+   <file>Aircraft/Generic/DualControl/dual-control-tools.nas</file>
+  </dual_control_tools>
+  <aircraft_dual_control>
+   <file>Aircraft/Grob-G115/Nasal/115-dual-control.nas</file>
+  </aircraft_dual_control>
+  <dual_control>
+   <file>Aircraft/Generic/DualControl/copilot-dual-control.nas</file>
+  </dual_control>
+  
+ </nasal>
+
+</PropertyList>
